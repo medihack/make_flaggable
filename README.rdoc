@@ -1,0 +1,81 @@
+= MakeFlaggable
+
+MakeFlaggable is an extension for building a user-centric flagging system for Rails 3 applications.
+It currently supports ActiveRecord models.
+
+== Installation
+
+add MakeFlaggable to your Gemfile
+
+  gem 'make_flaggable'
+
+afterwards execute
+
+  bundle install
+
+generate the required migration file
+
+  rails generate make_flaggable
+
+migrate the database
+
+  rake db:migrate
+
+== Usage
+
+  # Specify a model that can be flagged.
+  class Article < ActiveRecord::Base
+    make_flaggable
+  end
+
+  # Specify a model that can flag another model.
+  class User < ActiveRecord::Base
+    make_flagger
+  end
+
+  # You can specify that a flagger can only flag a flaggable once.
+  class User < ActiveRecord::Base
+    make_flagger :flag_once => true
+  end
+
+  # The user can now flag the flaggable.
+  # If the user already flagged the flaggable and :flag_once was set then an AlreadyFlaggedError is raised.
+  user.flag!(article, reason)
+
+  # The method without bang(!) does not raise the AlreadyFlaggedError when the user flags the flaggable more than once.
+  # Instead it just returns false and ignores the flagging.
+  # If :flag_once was not set then this method behaves like flag! method.
+  user.flag(article, reason)
+
+  # The user may unflag an already done flagging.
+  # If the user never flagged the flaggable then an NotFlaggedError is raised.
+  user.unflag!(article)
+
+  # The method without bang(!) does not raise the NotFlaggedError, but just returns false if the user never flagged
+  # the flaggable.
+  user.unflag(article)
+
+  # Get all flaggings of a flaggable.
+  article.flaggings
+
+  # Get the reason of a flagging.
+  flagging = article.flaggings.first
+  flagging.reason
+
+  # Get the flagger of the flagging.
+  flagging = article.flaggings.first
+  user = flagging.flagger
+
+  # Returns true if the article was flagged by any flagger, false otherwise
+  article.flagged?
+
+  # Flaggings can also be accessed by its flagger.
+  flagger.flaggings
+
+== Testing
+
+MakeFlaggable uses RSpec for testing and has a rake task for executing the provided specs
+
+  rake spec
+
+Copyright © 2010-2011 Kai Schlamp (http://www.medihack.org), released under the MIT license
