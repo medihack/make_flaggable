@@ -15,5 +15,9 @@ module MakeFlaggable
     def flagged?
       flaggings.count > 0
     end
+
+    def flagged_by?(flagger)
+      flagger.flagged?(self)
+    end
   end
 end

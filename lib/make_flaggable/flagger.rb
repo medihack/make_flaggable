@@ -57,6 +57,12 @@ module MakeFlaggable
       success
     end
 
+    def flagged?(flaggable)
+      check_flaggable(flaggable)
+
+      fetch_flaggings(flaggable).try(:first) ? true : false
+    end
+
     private
 
     def fetch_flaggings(flaggable)
