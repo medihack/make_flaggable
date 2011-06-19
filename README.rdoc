@@ -66,7 +66,13 @@ migrate the database
   flagging = article.flaggings.first
   user = flagging.flagger
 
-  # Returns true if the article was flagged by any flagger, false otherwise
+  # Returns true if the flagger flagged the flaggable, false otherwise.
+  user.flagged?(article)
+
+  # Return true if the flaggable was flagged by the flagger, false otherwise.
+  article.flagged_by?(user)
+
+  # Returns true if the article was flagged by any flagger at all, false otherwise.
   article.flagged?
 
   # Flaggings can also be accessed by its flagger.
@@ -77,5 +83,9 @@ migrate the database
 MakeFlaggable uses RSpec for testing and has a rake task for executing the provided specs
 
   rake spec
+
+or simply
+
+  rake
 
 Copyright © 2010-2011 Kai Schlamp (http://www.medihack.org), released under the MIT license
