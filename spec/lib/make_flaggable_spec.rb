@@ -20,6 +20,12 @@ describe "Make Flaggable" do
     @flagger_once.class.flagger?.should == true
   end
 
+  it "should have flaggings" do
+    @flagger.flaggings.length.should == 0
+    @flagger.flag!(@flaggable)
+    @flagger.flaggings.reload.length.should == 1
+  end
+
   describe "flagger" do
     describe "flag" do
       it "should create a flagging" do
@@ -79,10 +85,14 @@ describe "Make Flaggable" do
       end
     end
 
-    it "should have flaggings" do
-      @flagger.flaggings.length.should == 0
-      @flagger.flag!(@flaggable)
-      @flagger.flaggings.reload.length.should == 1
+    describe "flagged?" do
+      it "should check if flagger is flagged the flaggable" do
+        @flagger.flagged?(@flaggable).should == false
+        @flagger.flag!(@flaggable)
+        @flagger.flagged?(@flaggable).should == true
+        @flagger.unflag!(@flaggable)
+        @flagger.flagged?(@flaggable).should == false
+      end
     end
   end
 
