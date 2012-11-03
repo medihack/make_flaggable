@@ -57,6 +57,16 @@ migrate the database
 
   # Get all flaggings of a flaggable.
   article.flaggings
+  
+  # Get the flagging with a specified flag.
+  article.flaggings.with_flag(:flag_name)
+
+  # Get the flagger of the flagging.
+  flagging = article.flaggings.with_flag(:flag_name).first
+  user = flagging.flagger
+
+  # Returns true if the flagger flagged the flaggable, false otherwise.
+  user.flagged?(article, :flag_name)
 
   # Get the reason of a flagging.
   flagging = article.flaggings.first
