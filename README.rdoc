@@ -88,6 +88,9 @@ migrate the database
   # Flaggings can also be accessed by its flagger.
   flagger.flaggings
 
+  # In order to obtain all flaggers of a resource, the flaggers method can be invoked on the class
+  User.flaggers
+
 == Testing
 
 MakeFlaggable uses RSpec for testing and has a rake task for executing the provided specs
