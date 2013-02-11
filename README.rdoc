@@ -89,7 +89,10 @@ migrate the database
   flagger.flaggings
 
   # In order to obtain all flaggers of a resource, the flaggers method can be invoked on the class
+  # Passing no argument would return flaggers that have flagged across any flaggable resource
   User.flaggers
+  # An optional argument can be passed, restricting the detection to a particular resource
+  User.flaggers(Article)
 
 == Testing
 
