@@ -1,10 +1,11 @@
 module MakeFlaggable
   module Flaggable
     extend ActiveSupport::Concern
-
+    
+    attr_accessor :unflag
+    
     included do
-      has_many :flaggings, :class_name => "MakeFlaggable::Flagging", :as => :flaggable
-      attr_accessor :unflag
+      has_many :flaggings, :class_name => "MakeFlaggable::Flagging", :as => :flaggable  
       before_save :remove_flags?
     end
 
@@ -22,7 +23,7 @@ module MakeFlaggable
       flagger.flagged?(self)
     end
 
-    def remove_flags?()
+    def remove_flags?
       flaggings.destroy_all if unflag
     end
 
