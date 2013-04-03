@@ -23,7 +23,7 @@ module MakeFlaggable
     end
 
     def remove_flags?()
-      flaggings.destory_all if unflag
+      flaggings.destroy_all if unflag
     end
 
   end
