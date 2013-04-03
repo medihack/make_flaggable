@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project         = "make_flaggable"
 
   s.add_dependency "activerecord", "~> 3.2"
-  s.add_development_dependency "bundler", "~> 1.0.0"
+  s.add_development_dependency "bundler", '~> 1.3.4'
   s.add_development_dependency "rspec", "~> 2.5.0"
   s.add_development_dependency "database_cleaner", "0.6.7"
   s.add_development_dependency "sqlite3-ruby", "~> 1.3.0"
