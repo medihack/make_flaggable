@@ -5,7 +5,7 @@ module MakeFlaggable
     attr_accessor :unflag
     
     included do
-      has_many :flaggings, :class_name => "MakeFlaggable::Flagging", :as => :flaggable  
+      has_many :flaggings, :class_name => "MakeFlaggable::Flagging", :as => :flaggable, :dependent => :destroy
       before_save :remove_flags?
     end
 
