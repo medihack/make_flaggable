@@ -110,5 +110,12 @@ describe "Make Flaggable" do
       @flagger.unflag!(@flaggable)
       @flaggable.flagged?.should == false
     end
+
+    it 'should remove all flaggings if unflag is set' do
+      @flagger.flag!(@flaggable)
+      @flaggable.unflag = true
+      expect { @flaggable.save }.to change(@flaggable, :flagged?).from(true).to(false)
+    end
+
   end
 end
