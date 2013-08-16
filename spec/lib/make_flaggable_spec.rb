@@ -48,7 +48,7 @@ describe "Make Flaggable" do
 
       it "should only allow to flag a flaggable per flagger once without rasing an error" do
         @flagger_once.flag(@flaggable)
-        lambda { @flagger_once.flag(@flaggable) }.should_not raise_error(MakeFlaggable::Exceptions::AlreadyFlaggedError)
+        lambda { @flagger_once.flag(@flaggable) }.should_not raise_error
         MakeFlaggable::Flagging.count.should == 1
       end
     end
@@ -81,7 +81,7 @@ describe "Make Flaggable" do
       it "should not raise error if flagger not flagged the flaggable with normal method" do
         lambda {
           @flagger.unflag(@flaggable).should == false
-        }.should_not raise_error(MakeFlaggable::Exceptions::NotFlaggedError)
+        }.should_not raise_error
       end
     end
 

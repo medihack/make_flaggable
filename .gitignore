@@ -4,4 +4,5 @@ doc/*
 *.gem
 *.log
 *.sqlite3
+gemfiles/*.lock
 .bundle
