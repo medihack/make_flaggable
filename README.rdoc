@@ -1,6 +1,6 @@
 = MakeFlaggable
 
-MakeFlaggable is an extension for building a user-centric flagging system for Rails 3 applications.
+MakeFlaggable is an extension for building a user-centric flagging system for Rails 3 and 4 applications.
 It currently supports ActiveRecord models.
 
 == Installation
