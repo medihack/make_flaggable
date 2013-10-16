@@ -94,6 +94,37 @@ describe "Make Flaggable" do
         @flagger.flagged?(@flaggable).should == false
       end
     end
+
+    describe '.flaggers' do
+      let(:other_flaggable) { FlaggableModel.create :name => "Flaggable 1" }
+
+      before { @flagger.flag @flaggable }
+
+      context 'No Argument passed' do
+        context 'Single flaggable resource' do
+          before  { @flagger_once.flag other_flaggable }
+          specify { FlaggerModel.flaggers.should == [@flagger] }
+        end
+
+        context 'Multiple flaggable resources' do
+          before { @flagger.flag other_flaggable }
+          it 'does not return duplicates' do
+            FlaggerModel.flaggers.should == [@flagger]
+          end
+        end
+      end
+
+      context 'Argument passed' do
+        it 'returns flaggers who have flagged a particular flaggable resource' do
+          FlaggerModel.flaggers(FlaggableModel).should == [@flagger] 
+        end
+
+        it 'returns nothing if no flag is found' do
+          @flagger.unflag @flaggable
+          FlaggerModel.flaggers(FlaggableModel).should be_blank
+        end
+      end
+    end
   end
 
   describe "flaggable" do

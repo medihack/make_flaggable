@@ -15,6 +15,11 @@ ActiveRecord::Schema.define :version => 0 do
     t.string :name
   end
 
+  create_table :another_flaggable_models, :force => true do |t|
+    t.string :name
+  end
+
+
   create_table :flaggings, :force => true do |t|
      t.string :flaggable_type
      t.integer :flaggable_id
