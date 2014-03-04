@@ -12,3 +12,8 @@ end
 
 class InvalidFlaggableModel < ActiveRecord::Base
 end
+
+class AnotherFlaggableModel < ActiveRecord::Base
+  make_flaggable
+end
+

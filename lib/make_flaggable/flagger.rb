@@ -10,6 +10,15 @@ module MakeFlaggable
       def flagger?
         true
       end
+
+      # Returns flaggers who have flagged any resource
+      # If +flag_type+ is not set, returns flaggers of all resources
+      # takes flaggable_klass as an argument
+      def flaggers(flag_type = nil)
+        res = select("#{self.table_name}.*").joins(:flaggings).group("#{self.table_name}.id")
+
+        flag_type ? res.where('flaggings.flaggable_type LIKE ?', flag_type.to_s) : res
+      end
     end
 
     # Flag a +flaggable+ using the provided +reason+.

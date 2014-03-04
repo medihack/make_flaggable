@@ -48,7 +48,7 @@ describe "Make Flaggable" do
 
       it "should only allow to flag a flaggable per flagger once without rasing an error" do
         @flagger_once.flag(@flaggable)
-        lambda { @flagger_once.flag(@flaggable) }.should_not raise_error(MakeFlaggable::Exceptions::AlreadyFlaggedError)
+        lambda { @flagger_once.flag(@flaggable) }.should_not raise_error
         MakeFlaggable::Flagging.count.should == 1
       end
     end
@@ -81,7 +81,7 @@ describe "Make Flaggable" do
       it "should not raise error if flagger not flagged the flaggable with normal method" do
         lambda {
           @flagger.unflag(@flaggable).should == false
-        }.should_not raise_error(MakeFlaggable::Exceptions::NotFlaggedError)
+        }.should_not raise_error
       end
     end
 
@@ -92,6 +92,37 @@ describe "Make Flaggable" do
         @flagger.flagged?(@flaggable).should == true
         @flagger.unflag!(@flaggable)
         @flagger.flagged?(@flaggable).should == false
+      end
+    end
+
+    describe '.flaggers' do
+      let(:other_flaggable) { FlaggableModel.create :name => "Flaggable 1" }
+
+      before { @flagger.flag @flaggable }
+
+      context 'No Argument passed' do
+        context 'Single flaggable resource' do
+          before  { @flagger_once.flag other_flaggable }
+          specify { FlaggerModel.flaggers.should == [@flagger] }
+        end
+
+        context 'Multiple flaggable resources' do
+          before { @flagger.flag other_flaggable }
+          it 'does not return duplicates' do
+            FlaggerModel.flaggers.should == [@flagger]
+          end
+        end
+      end
+
+      context 'Argument passed' do
+        it 'returns flaggers who have flagged a particular flaggable resource' do
+          FlaggerModel.flaggers(FlaggableModel).should == [@flagger] 
+        end
+
+        it 'returns nothing if no flag is found' do
+          @flagger.unflag @flaggable
+          FlaggerModel.flaggers(FlaggableModel).should be_blank
+        end
       end
     end
   end
