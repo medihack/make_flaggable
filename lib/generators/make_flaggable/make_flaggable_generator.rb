@@ -15,6 +15,6 @@ class MakeFlaggableGenerator < Rails::Generators::Base
   end
 
   def generate_migration
-    migration_template 'migration.rb', 'db/migrate/create_make_flaggable_tables'
+    migration_template 'migration.rb', 'db/migrate/create_make_flaggable_tables.rb'
   end
 end
