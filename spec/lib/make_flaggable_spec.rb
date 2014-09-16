@@ -26,6 +26,12 @@ describe "Make Flaggable" do
     @flagger.flaggings.reload.length.should == 1
   end
 
+  it "flaggings should be scopable by .with_flag using reason" do
+    @flagger.flaggings.with_flag(:spam).length.should == 0
+    @flagger.flag!(@flaggable, :spam)
+    @flagger.flaggings.with_flag(:spam).reload.length.should == 1
+  end
+
   describe "flagger" do
     describe "flag" do
       it "should create a flagging" do
@@ -116,7 +122,7 @@ describe "Make Flaggable" do
 
       context 'Argument passed' do
         it 'returns flaggers who have flagged a particular flaggable resource' do
-          FlaggerModel.flaggers(FlaggableModel).should == [@flagger] 
+          FlaggerModel.flaggers(FlaggableModel).should == [@flagger]
         end
 
         it 'returns nothing if no flag is found' do
