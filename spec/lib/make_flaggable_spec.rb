@@ -99,6 +99,16 @@ describe "Make Flaggable" do
         @flagger.unflag!(@flaggable)
         @flagger.flagged?(@flaggable).should == false
       end
+
+      it "should check if flagger is flagged the flaggable with a particular reason" do
+        @flagger.flagged?(@flaggable, :spam).should == false
+        @flagger.flag!(@flaggable, :spam)
+        @flagger.flagged?(@flaggable, :spam).should == true
+        @flagger.flagged?(@flaggable, :ham).should == false
+        @flagger.unflag!(@flaggable, :spam)
+        @flagger.flagged?(@flaggable, :spam).should == false
+        @flagger.flagged?(@flaggable, :ham).should == false
+      end
     end
 
     describe '.flaggers' do

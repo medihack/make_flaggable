@@ -44,10 +44,10 @@ module MakeFlaggable
       end
     end
 
-    def unflag!(flaggable)
+    def unflag!(flaggable, reason = nil)
       check_flaggable(flaggable)
 
-      flaggings = fetch_flaggings(flaggable)
+      flaggings = fetch_flaggings(flaggable, reason)
 
       raise Exceptions::NotFlaggedError if flaggings.empty?
 
@@ -56,9 +56,9 @@ module MakeFlaggable
       true
     end
 
-    def unflag(flaggable)
+    def unflag(flaggable, reason = nil)
       begin
-        unflag!(flaggable)
+        unflag!(flaggable, reason = nil)
         success = true
       rescue Exceptions::NotFlaggedError
         success = false
@@ -66,18 +66,19 @@ module MakeFlaggable
       success
     end
 
-    def flagged?(flaggable)
+    def flagged?(flaggable, reason = nil)
       check_flaggable(flaggable)
 
-      fetch_flaggings(flaggable).try(:first) ? true : false
+      fetch_flaggings(flaggable, reason).try(:first) ? true : false
     end
 
     private
 
-    def fetch_flaggings(flaggable)
-      flaggings.where({
-        :flaggable => flaggable
+    def fetch_flaggings(flaggable, reason = nil)
+      flagger_flaggins = flaggings.where({
+		:flaggable => flaggable
       })
+      reason ? flagger_flaggins.where(:reason => reason) : flagger_flaggins
     end
 
     def check_flaggable(flaggable)
