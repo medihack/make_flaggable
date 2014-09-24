@@ -3,7 +3,7 @@ module MakeFlaggable
     extend ActiveSupport::Concern
 
     included do
-      has_many :flaggings, :class_name => "MakeFlaggable::Flagging", :as => :flaggable
+      has_many :flaggings, :class_name => "MakeFlaggable::Flagging", :as => :flaggable, :dependent => :destroy
     end
 
     module ClassMethods
