@@ -1,17 +1,3 @@
-appraise "rails_3_0" do
-  gem "activerecord", "~> 3.0.0"
-  gem 'activerecord-jdbcsqlite3-adapter', :platforms => :jruby
-  gem 'sqlite3', :platforms => :ruby
-  gem 'database_cleaner', '1.0.1'
-end
-
-appraise "rails_3_1" do
-  gem "activerecord", "~> 3.1.0"
-  gem 'activerecord-jdbcsqlite3-adapter', :platforms => :jruby
-  gem 'sqlite3', :platforms => :ruby
-  gem 'database_cleaner', '1.0.1'
-end
-
 appraise "rails_3_2" do
   gem "activerecord", "~> 3.2.0"
   gem 'activerecord-jdbcsqlite3-adapter', :platforms => :jruby
