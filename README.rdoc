@@ -1,3 +1,5 @@
+{<img src="https://travis-ci.org/dgilperez/make_flaggable.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/dgilperez/make_flaggable]
+
 = MakeFlaggable
 
 MakeFlaggable is an extension for building a user-centric flagging system for Rails 3 and 4 applications.
@@ -57,7 +59,7 @@ migrate the database
 
   # Get all flaggings of a flaggable.
   article.flaggings
-  
+
   # Get the flagging with a specified flag.
   article.flaggings.with_flag(:flag_name)
 

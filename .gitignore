@@ -6,3 +6,5 @@ doc/*
 *.sqlite3
 gemfiles/*.lock
 .bundle
+.ruby-version
+.ruby-gemset
