@@ -5,7 +5,7 @@
 MakeFlaggable is an extension for building a user-centric flagging system for Rails > 3.2 applications.
 It currently supports ActiveRecord models.
 
-**This fork supports Rails 4.2.**
+This fork supports Rails 4.2.
 
 == Installation
 
