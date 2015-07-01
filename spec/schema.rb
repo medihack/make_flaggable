@@ -1,14 +1,17 @@
 ActiveRecord::Schema.define :version => 0 do
   create_table :flaggable_models, :force => true do |t|
     t.string :name
+    t.integer :flaggings_count
   end
 
   create_table :flagger_models, :force => true do |t|
     t.string :name
+    t.integer :flaggings_count
   end
 
   create_table :flagger_once_models, :force => true do |t|
     t.string :name
+    t.integer :flaggings_count
   end
 
   create_table :invalid_flaggable_models, :force => true do |t|
