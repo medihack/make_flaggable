@@ -76,8 +76,7 @@ module MakeFlaggable
 
     def fetch_flaggings(flaggable)
       flaggings.where({
-        :flaggable_type => flaggable.class.to_s,
-        :flaggable_id => flaggable.id
+        :flaggable => flaggable
       })
     end
 
