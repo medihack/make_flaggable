@@ -1,25 +1,27 @@
 ActiveRecord::Schema.define :version => 0 do
   create_table :flaggable_models, :force => true do |t|
     t.string :name
-    t.integer :flaggings_count
+    t.integer :flaggings_count, default: 0
   end
 
   create_table :flagger_models, :force => true do |t|
     t.string :name
-    t.integer :flaggings_count
+    t.integer :flaggings_count, default: 0
   end
 
   create_table :flagger_once_models, :force => true do |t|
     t.string :name
-    t.integer :flaggings_count
+    t.integer :flaggings_count, default: 0
   end
 
   create_table :invalid_flaggable_models, :force => true do |t|
     t.string :name
+    t.integer :flaggings_count, default: 0
   end
 
   create_table :another_flaggable_models, :force => true do |t|
     t.string :name
+    t.integer :flaggings_count, default: 0
   end
 
 
