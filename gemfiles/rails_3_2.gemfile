@@ -2,9 +2,9 @@
 
 source "https://rubygems.org"
 
+gem "activerecord-jdbcsqlite3-adapter", :platforms => :jruby
+gem "sqlite3", :platforms => :ruby
 gem "activerecord", "~> 3.2.0"
-gem "activerecord-jdbcsqlite3-adapter", :platforms=>:jruby
-gem "sqlite3", :platforms=>:ruby
-gem "database_cleaner", "1.0.1"
+gem "test-unit", "~> 3.0"
 
-gemspec :path=>"../"
+gemspec :path => "../"
